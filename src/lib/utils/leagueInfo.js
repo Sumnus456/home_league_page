@@ -7,7 +7,7 @@ export const enableBlog = false; // requires VITE_CONTENTFUL_ACCESS_TOKEN and VI
 
 /*   STEP 2   */
 export const homepageText = `
-  <p>After beginning the fantasy football journey in 2009, in a little card shop in Fort Wayne, and playing redraft leagues through 2022, it was finally time to venture into the world of Dynasty in 2023. This website is here to document and display some of that moving forward.</p>
+  <p>After beginning the fantasy football journey in 2009 in a little card shop in Fort Wayne playing redraft leagues through 2022, it was finally time to venture into the world of Dynasty in 2023. This website is here to document and display some of that moving forward.</p>
 `;
 
 /*   STEP 3   */
