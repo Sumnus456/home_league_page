@@ -275,9 +275,9 @@
     <h3 bind:this={fiveOne}>5.1 League Tanking Policy</h3>
     <p>No team may intentionally leave starting roster spots empty. Any evidence of intentionally leaving roster spots empty in order to improve your draft position may be subject to punishment, including but not limited to the forfeiture of draft selections.</p>
 
-    <h2 class="sectionHeading" bind:this={six}>Section 6 Replacing Managers</h2>
+<!--    <h2 class="sectionHeading" bind:this={six}>Section 6 Replacing Managers</h2>
     
-<!--   <h3 bind:this={sixOne}>6.1 Removing Managers</h3>
+   <h3 bind:this={sixOne}>6.1 Removing Managers</h3>
     <p>Short of continuously failing to set a valid lineup, or confirmed collusion, no manager can be removed against their will. Participation, through the league chat, trade offers, and the waiver wire, is strongly encouraged but generally grounds for removal.</p>
     
     <h3 bind:this={sixTwo}>6.2 Replacing Managers</h3>
