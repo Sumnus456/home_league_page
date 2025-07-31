@@ -119,7 +119,7 @@
     
     <h3 class="noUnderscore clickable" onclick={() => goToSection(three)}>Section 3: Scoring System</h3>
     
-        <h4 class="noUnderscore clickable" onclick={() => goToSection(threeOne)}>3.1 Voting on Scoring System</h4>
+      <!--  <h4 class="noUnderscore clickable" onclick={() => goToSection(threeOne)}>3.1 Voting on Scoring System</h4> -->
     
     <h3 class="noUnderscore clickable" onclick={() => goToSection(four)}>Section 4: Postseason</h3>
     
