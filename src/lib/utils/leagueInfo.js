@@ -8,7 +8,7 @@ export const enableBlog = false; // requires VITE_CONTENTFUL_ACCESS_TOKEN and VI
 /*   STEP 2   */
 export const homepageText = `
   <p>After beginning the fantasy football journey in 2009 in a little card shop in Fort Wayne playing redraft leagues through 2022, it was finally time to venture into the world of Dynasty in 2023. This website is here to document and display some of that moving forward.</p>
-  <p>The 2025 season is approaching soon, and with it come some rule changes. This year we're going to add a game against the league median to hopefully help separate team records a bit more, with the lack of teams, everyone feels only a game or two apart all year.</p>
+  <p>Starting in 2025 we added a game against the league median each week to help separate team records a bit more. With a smaller league, everyone tends to feel only a game or two apart all year.</p>
 `;
 
 /*   STEP 3   */
@@ -95,7 +95,7 @@ export const managers = [
       "mode": "Rebuild", // (optional) 'Win Now', 'Dynasty', or 'Rebuild' (anything else and you will need to add a new png to /static/ similar to the 'Rebuild.png' and 'Win Now.png' currently in there)
       "valuePosition": "WR", // (optional) Favorite position (QB, WR, RB, TE, etc.)
       "rookieOrVets": "Vets", // (optional) 'Rookies' or 'Vets' (anything else and you will need to add a new png to /static/ similar to the 'Rookies.png' and 'Vets.png' currently in there)
-      "philosophy": "Your fantasy teasm's philosophy", // (optional)
+      "philosophy": "Your fantasy team's philosophy", // (optional)
       "tradingScale": 10, // 1 - 10 (optional)
       "preferredContact": "Sleeper",  // (optional) 'Text', 'WhatsApp', 'Sleeper', 'Email', 'Phone', 'Discord', and 'Carrier Pigeon' are currently supplied in the template
     },
