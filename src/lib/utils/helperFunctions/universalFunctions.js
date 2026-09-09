@@ -4,8 +4,8 @@ import { stringDate } from './news';
 
 const QUESTION = 'managers/question.jpg';
 
-// Sleeper's default avatar, used when a manager has no avatar set or the image fails to load
-export const DEFAULT_AVATAR = 'https://sleepercdn.com/images/v2/icons/player_default.webp';
+// Sleeper's default team avatar (the mascot), used when a manager has no avatar set or the image fails to load
+export const DEFAULT_AVATAR = 'https://sleepercdn.com/images/v2/avatars/avatar_default_orange.webp';
 
 // <img onerror> handler: swap a broken/empty avatar for Sleeper's default (guard against a loop if the default itself fails)
 export const handleAvatarError = (e) => {
