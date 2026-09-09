@@ -1,6 +1,6 @@
 <script>
     import { round } from "$lib/utils/helper";
-	import { getAvatarFromTeamManagers, getTeamNameFromTeamManagers } from "$lib/utils/helperFunctions/universalFunctions";
+	import { getAvatarFromTeamManagers, getTeamNameFromTeamManagers, handleAvatarError } from "$lib/utils/helperFunctions/universalFunctions";
 
     export let leagueTeamManagers, players, matchCol, playoffsStart, ix, playoffLength, consolation = false, losers = false, numRosters, consolationNum, selected;
 
@@ -345,7 +345,7 @@
                             <span />
                         {/if}
                         {#if matchup.roster_id || (!matchups.bye && !matchup.roster_id)}
-                            <img class="avatar{!matchups.bye && !matchup.roster_id ? ' avatarBye': ''}" src={getAvatarFromTeamManagers(leagueTeamManagers, matchup.roster_id, leagueTeamManagers.currentYear)} alt="team avatar" />
+                            <img class="avatar{!matchups.bye && !matchup.roster_id ? ' avatarBye': ''}" src={getAvatarFromTeamManagers(leagueTeamManagers, matchup.roster_id, leagueTeamManagers.currentYear)} alt="team avatar" onerror={handleAvatarError} />
                         {/if}
                         {#if matchup.roster_id}
                             <div class="points">

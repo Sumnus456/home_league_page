@@ -4,7 +4,7 @@
     import { onMount } from 'svelte';
     import DraftRow from './DraftRow.svelte';
     import { gotoManager } from '$lib/utils/helper'
-	import { getAvatarFromTeamManagers, getTeamNameFromTeamManagers } from '$lib/utils/helperFunctions/universalFunctions';
+	import { getAvatarFromTeamManagers, getTeamNameFromTeamManagers, handleAvatarError } from '$lib/utils/helperFunctions/universalFunctions';
     
     export let draftData, leagueTeamManagers, previous = false, year, players;
 
@@ -123,7 +123,7 @@
             {#each draftOrder as draftPosition}
                 {#if draftPosition}
                     <Cell class="draftTeam">
-                        <img class="avatar clickable" onclick={() => gotoManager({year, leagueTeamManagers, rosterID: draftPosition})} src="{getAvatarFromTeamManagers(leagueTeamManagers, draftPosition, year)}" alt="{getTeamNameFromTeamManagers(leagueTeamManagers, draftPosition, year)} avatar"/>
+                        <img class="avatar clickable" onclick={() => gotoManager({year, leagueTeamManagers, rosterID: draftPosition})} src="{getAvatarFromTeamManagers(leagueTeamManagers, draftPosition, year)}" alt="{getTeamNameFromTeamManagers(leagueTeamManagers, draftPosition, year)} avatar" onerror={handleAvatarError}/>
                         <br />
                         <span class="clickable" onclick={() => gotoManager({year, leagueTeamManagers, rosterID: draftPosition})}>{getTeamNameFromTeamManagers(leagueTeamManagers, draftPosition, year)}{@html getTeamNameFromTeamManagers(leagueTeamManagers, draftPosition, year) != getTeamNameFromTeamManagers(leagueTeamManagers, draftPosition) ? `<br /><span class="curDraftName">(${getTeamNameFromTeamManagers(leagueTeamManagers, draftPosition)})</span>` : ''}</span>
                     </Cell>

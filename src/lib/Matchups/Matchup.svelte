@@ -1,6 +1,6 @@
 <script>
     import {round} from '$lib/utils/helper'
-	import { getTeamFromTeamManagers } from '$lib/utils/helperFunctions/universalFunctions';
+	import { getTeamFromTeamManagers, DEFAULT_AVATAR, handleAvatarError } from '$lib/utils/helperFunctions/universalFunctions';
 
     export let matchup, players, active, ix, displayWeek, expandOverride=false, matchupWeek, leagueTeamManagers, year;
 
@@ -483,7 +483,7 @@
 <div class="matchup">
     <div class="header" onclick={() => expandClose()} bind:this={el} >
         <div class="opponent home{winning == "home" ? " homeGlow" : ""}">
-            <img class="avatar" src={home.manager.avatar} alt="home team avatar" />
+            <img class="avatar" src={home.manager.avatar || DEFAULT_AVATAR} alt="home team avatar" onerror={handleAvatarError} />
             <div class="name">{home.manager.name}</div>
             <div class="totalPoints totalPointsR">{round(homePointsTotal)}<div class="totalProjection">{round(homeProjectionTotal)}</div></div>
         </div>
@@ -491,7 +491,7 @@
         <div class="opponent away{winning == "away" ? " awayGlow" : ""}">
             <div class="totalPoints totalPointsL">{round(awayPointsTotal)}<div class="totalProjection">{round(awayProjectionTotal)}</div></div>
             <div class="name" >{away.manager.name}</div>
-            <img class="avatar" src={away.manager.avatar} alt="away team avatar" />
+            <img class="avatar" src={away.manager.avatar || DEFAULT_AVATAR} alt="away team avatar" onerror={handleAvatarError} />
         </div>
     </div>
 
