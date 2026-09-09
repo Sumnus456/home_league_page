@@ -170,7 +170,7 @@
 
     <p>6 IR Spots (Player must be labeled as IR, Out, or Covid in the Sleeper App)</p>
 
-    <p>4 Taxi Squad Spots. Taxi eligibility follows the Sleeper settings (currently players with two or fewer years of NFL experience), and players must be stashed on the taxi squad before Week 4. Taxi players do not count against the 20-man active roster but cannot be started.</p>
+    <p>4 Taxi Squad Spots. Taxi eligibility follows the Sleeper settings (currently players with two or fewer years of NFL experience), and players must be placed on the taxi squad before the start of the regular season. Taxi players do not count against the 20-man active roster but cannot be started.</p>
     
   <!--  <h4 bind:this={oneOneOne}>1.1.1 Position Maximums</h4>
         
