@@ -149,8 +149,8 @@
     
     <h3 class="subSectionHeading" bind:this={oneOne}>1.1 Positional Breakdown</h3>
     
-    <p>25 Total Players</p>
-    
+    <p>20 Total Players on the active roster (not counting IR or Taxi Squad)</p>
+
     <p class="underscore">Starters</p>
     <ul>
         <li>QB</li>
@@ -165,10 +165,12 @@
         <li>D/ST</li>
         <li>K</li>
     </ul>
-    
-    <p>14 Bench</p>
+
+    <p>9 Bench (trimmed ahead of the 2025 season to keep the waiver wire competitive)</p>
 
     <p>6 IR Spots (Player must be labeled as IR, Out, or Covid in the Sleeper App)</p>
+
+    <p>4 Taxi Squad Spots. Taxi eligibility follows the Sleeper settings (currently players with two or fewer years of NFL experience), and players must be stashed on the taxi squad before Week 4. Taxi players do not count against the 20-man active roster but cannot be started.</p>
     
   <!--  <h4 bind:this={oneOneOne}>1.1.1 Position Maximums</h4>
         
@@ -265,7 +267,6 @@
     <ol>
         <li>Points For</li>
         <li>Head 2 Head Record</li>
-        <li>Division Record</li>
         <li>Total Points Against</li>
         <li>Coin Flip</li>
     </ol>
