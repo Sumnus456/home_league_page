@@ -1,5 +1,6 @@
 <script>
 	import { gotoManager } from '$lib/utils/helper';
+	import { DEFAULT_AVATAR, handleAvatarError } from '$lib/utils/helperFunctions/universalFunctions';
   	import DataTable, { Head, Body, Row, Cell } from '@smui/data-table';
 	import { Icon } from '@smui/icon-button';
 	import RosterRow from "./RosterRow.svelte"
@@ -264,7 +265,7 @@
 			<Row>
 				<Cell colspan=4 class="r_{division} clickable">
 					<h3 onclick={() => gotoManager({leagueTeamManagers, rosterID: roster.roster_id})}>
-						<img alt="team avatar" class="teamAvatar" src="{team ? team.avatar : 'https://sleepercdn.com/images/v2/icons/player_default.webp'}" />
+						<img alt="team avatar" class="teamAvatar" src="{team?.avatar || DEFAULT_AVATAR}" onerror={handleAvatarError} />
 						{team?.name ? team.name : 'No Manager'}
 					</h3>
 

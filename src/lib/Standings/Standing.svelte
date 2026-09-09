@@ -1,5 +1,6 @@
 <script>
     import { gotoManager } from '$lib/utils/helper';
+    import { DEFAULT_AVATAR, handleAvatarError } from '$lib/utils/helperFunctions/universalFunctions';
   	import { Row, Cell } from '@smui/data-table';
 
     export let columnOrder, team, standing, leagueTeamManagers;
@@ -30,7 +31,7 @@
 <Row class="contrastRow">
     <Cell class="">
         <div class="clickable team" onclick={() => gotoManager({leagueTeamManagers, rosterID: standing.rosterID})}>
-            <img alt="team avatar" class="teamAvatar clickable" src="{team.avatar}" />
+            <img alt="team avatar" class="teamAvatar clickable" src="{team?.avatar || DEFAULT_AVATAR}" onerror={handleAvatarError} />
             <div>
                 {team.name}
             </div>

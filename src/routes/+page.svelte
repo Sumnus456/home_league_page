@@ -2,7 +2,7 @@
 	import LinearProgress from '@smui/linear-progress';
 	import { getNflState, leagueName, getAwards, getLeagueTeamManagers, homepageText, managers, gotoManager, enableBlog, waitForAll } from '$lib/utils/helper';
 	import { Transactions, PowerRankings, HomePost} from '$lib/components';
-	import { getAvatarFromTeamManagers, getTeamFromTeamManagers } from '$lib/utils/helperFunctions/universalFunctions';
+	import { getAvatarFromTeamManagers, getTeamFromTeamManagers, handleAvatarError } from '$lib/utils/helperFunctions/universalFunctions';
 
     const nflState = getNflState();
     const podiumsData = getAwards();
@@ -178,7 +178,7 @@
                 {#if podiums[0]}
                     <h4>{podiums[0].year} Fantasy Champ</h4>
                     <div id="champ" onclick={() => {if(managers.length) gotoManager({year: podiums[0].year, leagueTeamManagers, rosterID: parseInt(podiums[0].champion)})}} >
-                        <img src="{getAvatarFromTeamManagers(leagueTeamManagers, podiums[0].champion, podiums[0].year)}" class="first" alt="champion" />
+                        <img src="{getAvatarFromTeamManagers(leagueTeamManagers, podiums[0].champion, podiums[0].year)}" class="first" alt="champion" onerror={handleAvatarError} />
                         <img src="/laurel.png" class="laurel" alt="laurel" />
                     </div>
                     <span class="label" onclick={() => gotoManager({year: podiums[0].year, leagueTeamManagers, rosterID: parseInt(podiums[0].champion)})} >{getTeamFromTeamManagers(leagueTeamManagers, podiums[0].champion, podiums[0].year).name}</span>

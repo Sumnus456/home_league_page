@@ -1,5 +1,5 @@
 <script>
-	import { getAvatarFromTeamManagers, getTeamNameFromTeamManagers, renderManagerNames } from "$lib/utils/helperFunctions/universalFunctions";
+	import { getAvatarFromTeamManagers, getTeamNameFromTeamManagers, renderManagerNames, DEFAULT_AVATAR, handleAvatarError } from "$lib/utils/helperFunctions/universalFunctions";
 
     export let leagueTeamManagers, managerID = null, rosterID = null, year, compressed = false, points = null;
 
@@ -63,9 +63,9 @@
 
 <div class="recordTeam">
     {#if user}
-        <img alt="team avatar" class="teamAvatar{compressed ? " compressed" : ""}" src="{`https://sleepercdn.com/avatars/thumbs/${user.avatar}`}" />
+        <img alt="team avatar" class="teamAvatar{compressed ? " compressed" : ""}" src="{user.avatar ? `https://sleepercdn.com/avatars/thumbs/${user.avatar}` : DEFAULT_AVATAR}" onerror={handleAvatarError} />
     {:else if rosterID}
-        <img alt="team avatar" class="teamAvatar{compressed ? " compressed" : ""}" src="{getAvatarFromTeamManagers(leagueTeamManagers, rosterID, year)}" />
+        <img alt="team avatar" class="teamAvatar{compressed ? " compressed" : ""}" src="{getAvatarFromTeamManagers(leagueTeamManagers, rosterID, year)}" onerror={handleAvatarError} />
     {/if}
     <span class="name">
         <div class="teamName">

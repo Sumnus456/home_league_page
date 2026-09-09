@@ -1,5 +1,5 @@
 <script>
-	import { getAvatarFromTeamManagers, getTeamNameFromTeamManagers, gotoManager, round } from "./utils/helperFunctions/universalFunctions";
+	import { getAvatarFromTeamManagers, getTeamNameFromTeamManagers, gotoManager, round, handleAvatarError } from "./utils/helperFunctions/universalFunctions";
 
 
     let {leagueTeamManagers, stat, label, xMin, xMax, secondStat, managerID, rosterID, color, year} = $props();
@@ -127,7 +127,7 @@
 </style>
 
 <div class="barParent">
-    <img alt="team avatar" onclick={() => gotoManager({year, leagueTeamManagers, managerID, rosterID})} style="border-color: var({color});" class="teamAvatar clickable" src="{user ? `https://sleepercdn.com/avatars/thumbs/${user.avatar}` : getAvatarFromTeamManagers(leagueTeamManagers, rosterID, year)}" />
+    <img alt="team avatar" onclick={() => gotoManager({year, leagueTeamManagers, managerID, rosterID})} style="border-color: var({color});" class="teamAvatar clickable" src="{user && user.avatar ? `https://sleepercdn.com/avatars/thumbs/${user.avatar}` : getAvatarFromTeamManagers(leagueTeamManagers, rosterID, year)}" onerror={handleAvatarError} />
     <span class="managerName clickable" onclick={() => gotoManager({year, leagueTeamManagers, managerID, rosterID})}>
         {#if user}
             {user.display_name}

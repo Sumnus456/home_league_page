@@ -4,6 +4,16 @@ import { stringDate } from './news';
 
 const QUESTION = 'managers/question.jpg';
 
+// Sleeper's default avatar, used when a manager has no avatar set or the image fails to load
+export const DEFAULT_AVATAR = 'https://sleepercdn.com/images/v2/icons/player_icons/default_avatar.jpg';
+
+// <img onerror> handler: swap a broken/empty avatar for Sleeper's default (guard against a loop if the default itself fails)
+export const handleAvatarError = (e) => {
+    if(e?.target && e.target.src !== DEFAULT_AVATAR) {
+        e.target.src = DEFAULT_AVATAR;
+    }
+}
+
 export const cleanName = (name) => {
     return name.replace('Team ', '').toLowerCase().replace(/[ ’'!"#$%&\\'()\*+,\-\.\/:;<=>?@\[\\\]\^_`{|}~']/g, "");
 }
@@ -194,12 +204,12 @@ export const getTeamData = (users, ownerID) => {
 	const user = users[ownerID];
 	if(user) {
 		return {
-			avatar: user.metadata?.avatar ? user.metadata.avatar : `https://sleepercdn.com/avatars/thumbs/${user.avatar}`,
+			avatar: user.metadata?.avatar ? user.metadata.avatar : (user.avatar ? `https://sleepercdn.com/avatars/thumbs/${user.avatar}` : DEFAULT_AVATAR),
 			name: user.metadata.team_name ? user.metadata.team_name : user.display_name,
 		}
 	}
     return {
-        avatar: `https://sleepercdn.com/images/v2/icons/player_default.webp`,
+        avatar: DEFAULT_AVATAR,
         name: 'Unknown Team',
     }
 }
@@ -216,7 +226,7 @@ export const getAvatarFromTeamManagers = (teamManagers, rosterID, year) => {
     if(roster == null) {
         return QUESTION;
     }
-    return roster.team?.avatar;
+    return roster.team?.avatar || DEFAULT_AVATAR;
 }
 
 export const getTeamNameFromTeamManagers = (teamManagers, rosterID, year) => {
