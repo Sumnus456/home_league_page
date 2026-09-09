@@ -1,6 +1,6 @@
 /*   STEP 1   */
-export const leagueID = "1204920913397559296"; // your league ID
-export const leagueName = "Fantasy '25"; // your league name
+export const leagueID = "1338193642489118720"; // your league ID
+export const leagueName = "Fantasy '26"; // your league name
 export const dues = 0;
 export const dynasty = true; // true for dynasty leagues, false for redraft and keeper
 export const enableBlog = false; // requires VITE_CONTENTFUL_ACCESS_TOKEN and VITE_CONTENTFUL_SPACE environment variables
