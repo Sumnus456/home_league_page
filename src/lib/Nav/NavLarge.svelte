@@ -21,8 +21,8 @@
 		display: flex;
 		align-items: center;
 		justify-content: space-between;
-		height: 64px;
-		padding: 0 1.5em;
+		height: 80px;
+		padding: 0 24px;
 		background-color: var(--navBg);
 		border-bottom: 2px solid var(--navBorder);
 	}
@@ -37,7 +37,7 @@
 
 	.leagueName {
 		font-weight: 600;
-		font-size: 1rem;
+		font-size: 20px;
 		color: var(--navActive);
 		white-space: nowrap;
 	}
@@ -137,7 +137,7 @@
 
 <header class="topBar">
 	<a href="/" class="brand">
-		<img src="/badge.png" alt="league logo" style="width: 40px; height: 40px; object-fit: contain;" />
+		<img src="/badge.png" alt="league logo" style="width: 48px; height: 48px; object-fit: contain;" />
 		<span class="leagueName">{leagueName}</span>
 	</a>
 
