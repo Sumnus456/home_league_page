@@ -63,7 +63,7 @@
 		display: inline-flex;
 		align-items: center;
 		gap: 0.3em;
-		padding: 0.4em 0.2em;
+		padding: 0.4rem 1rem;
 		color: var(--navInactive);
 		text-decoration: none;
 		font-size: 0.95em;
