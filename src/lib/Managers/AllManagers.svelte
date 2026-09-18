@@ -17,7 +17,7 @@
 
     .managerConstrained {
         width: 97%;
-        max-width: 800px;
+        max-width: 1100px;
         margin: 0 auto;
     }
 

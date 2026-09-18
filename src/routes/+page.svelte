@@ -27,7 +27,7 @@
 
     .text {
         padding: 0 30px;
-        max-width: 620px;
+        max-width: 900px;
         margin: 0 auto;
     }
 
@@ -36,7 +36,7 @@
         z-index: 1;
         width: 100%;
         min-width: 470px;
-        max-width: 470px;
+        max-width: 600px;
         min-height: 100%;
 		background-color: var(--ebebeb);
         border-left: var(--eee);

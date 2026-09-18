@@ -62,7 +62,7 @@ import { dynasty } from './utils/helper';
 
     :global(.list) {
         width: 90%;
-        max-width: 800px;
+        max-width: 1100px;
         border: 1px solid
         var(--mdc-theme-text-hint-on-background, var(--d7d7d7));
         margin: 15px auto;
