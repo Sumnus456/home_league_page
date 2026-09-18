@@ -1,5 +1,5 @@
 <script>
-	import { tabs } from '$lib/utils/tabs';
+	import { tabs, isExternal } from '$lib/utils/tabs';
 	import Drawer, {
 	  Content,
 	  Header,
@@ -18,7 +18,11 @@
 
 	const selectTab = (tab) => {
 		open = false;
-		goto(tab.dest);
+		if(isExternal(tab.dest)) {
+			window.open(tab.dest, '_blank');
+		} else {
+			goto(tab.dest);
+		}
 	}
 </script>
 
@@ -92,7 +96,7 @@
 								</Item>
 							{/if}
 						{:else}
-							<Item href="javascript:void(0)" onSMUIAction={() => selectTab(subTab)} activated={active == subTab.dest}  ontouchstart={() => {if(subTab.label != 'Go to Sleeper') preloadData(subTab.dest)}} onmouseover={() => {if(subTab.label != 'Go to Sleeper') preloadData(subTab.dest)}}>
+							<Item href="javascript:void(0)" onSMUIAction={() => selectTab(subTab)} activated={active == subTab.dest}  ontouchstart={() => {if(!isExternal(subTab.dest)) preloadData(subTab.dest)}} onmouseover={() => {if(!isExternal(subTab.dest)) preloadData(subTab.dest)}}>
 								<Graphic class="material-icons{active == subTab.dest ? "" : " nav-item"}" aria-hidden="true">{subTab.icon}</Graphic>
 								<Text class="{active == subTab.dest ? "" : "nav-item"}">{subTab.label}</Text>
 							</Item>

@@ -1,5 +1,5 @@
 <script>
-	import { tabs } from '$lib/utils/tabs';
+	import { tabs, isExternal } from '$lib/utils/tabs';
 	import Tab, { Icon, Label } from '@smui/tab';
 	import List, { Item, Graphic, Text, Separator } from '@smui/list';
 	import TabBar from '@smui/tab-bar';
@@ -36,7 +36,11 @@
 
 	const subGoto = (dest) => {
 		open(false);
-		goto(dest);
+		if(isExternal(dest)) {
+			window.open(dest, '_blank');
+		} else {
+			goto(dest);
+		}
 	}
 
 	let tabChildren = $state([]);
@@ -144,7 +148,7 @@
 						<Separator />
 					{/if}
 				{:else}
-					<Item onSMUIAction={() => subGoto(subTab.dest)} ontouchstart={() => {if(subTab.label != 'Go to Sleeper') preloadData(subTab.dest)}} onmouseover={() => {if(subTab.label != 'Go to Sleeper') preloadData(subTab.dest)}}>
+					<Item onSMUIAction={() => subGoto(subTab.dest)} ontouchstart={() => {if(!isExternal(subTab.dest)) preloadData(subTab.dest)}} onmouseover={() => {if(!isExternal(subTab.dest)) preloadData(subTab.dest)}}>
 						<Graphic class="material-icons">{subTab.icon}</Graphic>
 						<Text class="subText">{subTab.label}</Text>
 					</Item>

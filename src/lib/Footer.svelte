@@ -1,7 +1,7 @@
 <script>
 	import { goto } from '$app/navigation';
     import { managers } from '$lib/utils/helper';
-	import { tabs } from '$lib/utils/tabs';
+	import { tabs, isExternal } from '$lib/utils/tabs';
 	import { onMount } from 'svelte';
 
 	let outOfDate = false;
@@ -116,8 +116,8 @@
 					{#each tab.children as child}
                         <!-- Shouldn't show Managers tab unless managers has been populated -->
 				        {#if child.label != "Managers" || managers.length > 0}
-							{#if child.label == "Go to Sleeper"}
-								<li><div class="navLink" onclick={() => window.location = child.dest}>{child.label}</div></li>
+							{#if isExternal(child.dest)}
+								<li><div class="navLink" onclick={() => window.open(child.dest, '_blank')}>{child.label}</div></li>
 							{:else}
                             	<li><div class="navLink" onclick={() => goto(child.dest)}>{child.label}</div></li>
 							{/if}

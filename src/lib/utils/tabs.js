@@ -1,5 +1,7 @@
 import {leagueID} from '$lib/utils/leagueInfo';
 
+export const isExternal = (dest) => /^https?:\/\//.test(dest);
+
 export const tabs = [
     {
         icon: 'home',
