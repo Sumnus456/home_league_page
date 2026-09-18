@@ -3,17 +3,24 @@
 	import { Nav, Footer } from "$lib/components"
     import { dev } from '$app/environment';
     import { injectAnalytics } from '@vercel/analytics/sveltekit';
- 
+    import { sidebarContent } from '$lib/stores';
+
     injectAnalytics({ mode: dev ? 'development' : 'production' });
 </script>
 
 <main>
-    <div class="appShell">
+    <div class="appShell" class:has-sidebar={$sidebarContent}>
         <Nav /> <!-- adds the nav (small and large) -->
 
         <div class="pageContent">
             <slot />
         </div>
+
+        {#if $sidebarContent}
+            <div class="rightSidebar">
+                <svelte:component this={$sidebarContent} />
+            </div>
+        {/if}
     </div>
 
     <Footer /> <!-- adds the footer -->
@@ -39,6 +46,13 @@
             min-height: 100vh;
         }
 
+        .appShell.has-sidebar {
+            grid-template-columns: 200px 1fr clamp(200px, 20vw, 260px);
+            grid-template-areas:
+                "topbar topbar topbar"
+                "leftnav content sidebar";
+        }
+
         :global(.appShell .topBar) {
             grid-area: topbar;
         }
@@ -50,6 +64,11 @@
         :global(.appShell .pageContent) {
             grid-area: content;
             flex: 1;
+            overflow-y: auto;
+        }
+
+        .rightSidebar {
+            grid-area: sidebar;
             overflow-y: auto;
         }
     }
