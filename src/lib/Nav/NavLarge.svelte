@@ -1,4 +1,5 @@
 <script>
+	import { onMount } from 'svelte';
 	import { tabs, isExternal } from '$lib/utils/tabs';
 	import Tab, { Icon, Label } from '@smui/tab';
 	import List, { Item, Graphic, Text, Separator } from '@smui/list';
@@ -11,21 +12,51 @@
 
 	let display = $state(false);
 	let el = $state();
+	let parentEl = $state();
 	let width = $state();
 	let height= $state();
 	let left = $state();
 	let top = $state();
 
+	// .subMenu is positioned absolute relative to .parent, so its offsets must be
+	// measured against .parent's rect, not the viewport (getBoundingClientRect() alone).
+	const computePosition = () => {
+		const elRect = el?.getBoundingClientRect();
+		const parentRect = parentEl?.getBoundingClientRect();
+		if(!elRect || !parentRect) {
+			top = 0;
+			height = 0;
+			left = 0;
+			width = 0;
+			return;
+		}
+
+		top = elRect.top - parentRect.top;
+		height = (elRect.bottom - parentRect.top) + 1;
+		left = elRect.left - parentRect.left;
+		width = elRect.right - elRect.left;
+	}
+
 	$effect(() => {
-		top = el?.getBoundingClientRect() ? el?.getBoundingClientRect().top  : 0;
-		const bottom = el?.getBoundingClientRect() ? el?.getBoundingClientRect().bottom  : 0;
+		computePosition();
+	});
 
-		height = bottom - top + 1;
+	onMount(() => {
+		const resizeObserver = new ResizeObserver(() => computePosition());
+		if(el) resizeObserver.observe(el);
+		if(parentEl) resizeObserver.observe(parentEl);
 
-		left = el?.getBoundingClientRect() ? el?.getBoundingClientRect().left  : 0;
-		const right = el?.getBoundingClientRect() ? el?.getBoundingClientRect().right  : 0;
+		// Toggling dark/light mode swaps a stylesheet, which can reflow the tab bar;
+		// wait a frame for that reflow before recomputing. See switchTheme() in Nav/index.svelte.
+		const handleThemeChange = () => requestAnimationFrame(computePosition);
+		window.addEventListener('resize', computePosition);
+		window.addEventListener('theme-changed', handleThemeChange);
 
-		width = right - left;
+		return () => {
+			resizeObserver.disconnect();
+			window.removeEventListener('resize', computePosition);
+			window.removeEventListener('theme-changed', handleThemeChange);
+		};
 	});
 
 	let innerWidth = $state();
@@ -107,7 +138,7 @@
 
 <div tabindex="0" role="button" class="overlay" style="display: {display ? "block" : "none"};" onclick={() => open(true)}></div>
 
-<div class="parent">
+<div class="parent" bind:this={parentEl}>
 	<TabBar class="navBar" {tabs} key={(tab) => tab.key} bind:active>
 		{#snippet tab(tab)}
 			{#if tab.nest}

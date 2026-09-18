@@ -28,6 +28,7 @@
 		document.head
 		.querySelector('link[href="/smui-dark.css"]')
 		.insertAdjacentElement("afterend", themeLink);
+		window.dispatchEvent(new Event('theme-changed'));
 	}
 </script>
 
