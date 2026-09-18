@@ -1,101 +1,47 @@
 <script>
-    import List, { Item, Graphic, Separator, Text } from '@smui/list';
+    import List, { Item, Graphic, Separator, Text, PrimaryText, SecondaryText } from '@smui/list';
 import { dynasty } from './utils/helper';
 
-    const today = new Date();
     const resources = [
         {
-            name: "FTN Fantasy",
-            url: "https://www.ftnfantasy.com/nfl",
+            name: "KeepTradeCut",
+            url: "https://keeptradecut.com",
+            description: "Trade calculator and dynasty rankings, crowdsourced from millions of dynasty managers. Free.",
             icon: "insights",
-            premium: true,
-            separator: true,
-        },
-        {
-            name: "The Fantasy Footballers",
-            url: "https://www.thefantasyfootballers.com/",
-            icon: "podcasts",
-            premium: true,
+            premium: false,
             separator: true,
         },
         {
             name: "FantasyPros Dynasty Trade Value Chart",
-            url: `https://www.fantasypros.com/${today.getFullYear()}/${today.getMonth() + 1}/fantasy-football-rankings-dynasty-trade-value-chart-${today.toLocaleString('default', { month: 'long' }).toLowerCase()}-${today.getFullYear()}-update/`,
+            url: "https://www.fantasypros.com/nfl/trade-value/dynasty.php",
+            description: "Expert consensus dynasty trade values. Free tier available.",
             icon: "assessment",
-            premium: false,
+            premium: true,
             separator: true,
-            dynastyOnly: true,
         },
         {
-            name: "DynastyProcess Trade Calculator",
-            url: "https://apps.dynastyprocess.com/calculator/",
+            name: "FantasyPros Trade Analyzer",
+            url: "https://www.fantasypros.com/nfl/trade-analyzer/dynasty.php",
+            description: "Evaluate trades using expert rankings and your league settings. Free tier available.",
             icon: "calculate",
-            premium: false,
+            premium: true,
             separator: true,
-            dynastyOnly: true,
         },
         {
-            name: "Dynasty League Football",
-            url: "https://dynastyleaguefootball.com/",
+            name: "Draft Sharks",
+            url: "https://www.draftsharks.com",
+            description: "Fantasy football rankings, projections, and tools. Free tier available.",
             icon: "insights",
             premium: true,
             separator: true,
-            dynastyOnly: true,
         },
         {
             name: "Reddit Dynasty Fantasy Football",
-            url: "https://www.reddit.com/r/DynastyFF/",
+            url: "https://www.reddit.com/r/DynastyFF",
+            description: "Active community for dynasty news, advice, and discussion. Free.",
             icon: "article",
-            premium: false,
-            separator: true,
-            dynastyOnly: true,
-        },
-        {
-            name: "Reddit Fantasy Football",
-            url: "https://www.reddit.com/r/fantasyfootball/",
-            icon: "article",
-            premium: false,
-            separator: true,
-            redraftOnly: true,
-        },
-        {
-            name: "Dynasty 101 Trade Calculator",
-            url: "https://dynasty101.com/trade-calculator/",
-            icon: "calculate",
-            premium: false,
-            separator: true,
-            dynastyOnly: true,
-        },
-        {
-            name: "Dynasty Nerds GM",
-            url: "https://gm.dynastynerds.com/",
-            icon: "insights",
-            premium: true,
-            separator: true,
-            dynastyOnly: true,
-        },
-        {
-            name: "Fantasy Football Trade Analyzer",
-            url: `https://fantasyfootballcalculator.com/trade-analyzer`,
-            icon: "calculate",
-            premium: false,
-            separator: true,
-            redraftOnly: true,
-        },
-        {
-            name: "Reddit FF Trade Analyzer",
-            url: "https://www.reddit.com/r/TradeAnalyzerFF/",
-            icon: "assessment",
-            premium: false,
-            separator: true,
-        },
-        {
-            name: "FantasyCalc Trade Calculator",
-            url: "https://www.fantasycalc.com/trade-calculator",
-            icon: "calculate",
             premium: false,
             separator: false,
-            dynastyOnly: false,
         },
     ];
 </script>
@@ -142,7 +88,7 @@ import { dynasty } from './utils/helper';
         <h4>Helpful Dynasty Resources</h4>
     </div>
 
-    <List class="list" dense>
+    <List class="list" twoLine dense>
         {#each resources as resource}
             {#if resource.dynastyOnly && dynasty}
                 <a target="_blank" href="{resource.url}">
@@ -150,7 +96,12 @@ import { dynasty } from './utils/helper';
                         {#if resource.icon}
                             <Graphic class="material-icons">{resource.icon}</Graphic>
                         {/if}
-                        <Text class="linkText">{resource.name}{resource.premium ? "*" : ""}</Text>
+                        <Text class="linkText">
+                            <PrimaryText>{resource.name}{resource.premium ? "*" : ""}</PrimaryText>
+                            {#if resource.description}
+                                <SecondaryText>{resource.description}</SecondaryText>
+                            {/if}
+                        </Text>
                     </Item>
                     {#if resource.separator}
                         <Separator />
@@ -162,7 +113,12 @@ import { dynasty } from './utils/helper';
                         {#if resource.icon}
                             <Graphic class="material-icons">{resource.icon}</Graphic>
                         {/if}
-                        <Text class="linkText">{resource.name}{resource.premium ? "*" : ""}</Text>
+                        <Text class="linkText">
+                            <PrimaryText>{resource.name}{resource.premium ? "*" : ""}</PrimaryText>
+                            {#if resource.description}
+                                <SecondaryText>{resource.description}</SecondaryText>
+                            {/if}
+                        </Text>
                     </Item>
                     {#if resource.separator}
                         <Separator />
@@ -174,7 +130,12 @@ import { dynasty } from './utils/helper';
                         {#if resource.icon}
                             <Graphic class="material-icons">{resource.icon}</Graphic>
                         {/if}
-                        <Text class="linkText">{resource.name}{resource.premium ? "*" : ""}</Text>
+                        <Text class="linkText">
+                            <PrimaryText>{resource.name}{resource.premium ? "*" : ""}</PrimaryText>
+                            {#if resource.description}
+                                <SecondaryText>{resource.description}</SecondaryText>
+                            {/if}
+                        </Text>
                     </Item>
                     {#if resource.separator}
                         <Separator />
@@ -183,5 +144,5 @@ import { dynasty } from './utils/helper';
             {/if}
         {/each}
     </List>
-    <p class="disclaimer">*Some or all content is behind a paywall</p>
+    <p class="disclaimer">*Some or all content on marked sites may require a paid subscription.</p>
 </div>
