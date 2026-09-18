@@ -7,8 +7,16 @@
 	import { leagueName } from '$lib/utils/leagueInfo';
 
 	// toggle dark mode
-	let darkTheme = $state(typeof window === "undefined" || window.matchMedia("(prefers-color-scheme: dark)").matches);
+	const savedTheme = typeof window === "undefined" ? null : localStorage.getItem('theme');
+	let darkTheme = $state(
+		typeof window === "undefined"
+			? true
+			: savedTheme ? savedTheme === 'dark' : window.matchMedia("(prefers-color-scheme: dark)").matches
+	);
 	function switchTheme(currentTheme) {
+		try {
+			localStorage.setItem('theme', currentTheme ? 'dark' : 'light');
+		} catch (e) {}
 		currentTheme = !currentTheme;
 		let themeLink = document.head.querySelector("#theme");
 		if (!themeLink) {

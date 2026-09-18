@@ -54,6 +54,15 @@
 		<!-- SMUI Styles -->
 		<link rel="stylesheet" href="/smui.css" media="(prefers-color-scheme: light)" />
 		<link rel="stylesheet" href="/smui-dark.css" media="(prefers-color-scheme: dark)" />
+		<script>
+			try {
+				var savedTheme = localStorage.getItem('theme');
+				if (savedTheme === 'dark' || savedTheme === 'light') {
+					document.querySelector('link[href="/smui.css"]').media = savedTheme === 'dark' ? 'not all' : 'all';
+					document.querySelector('link[href="/smui-dark.css"]').media = savedTheme === 'dark' ? 'all' : 'not all';
+				}
+			} catch (e) {}
+		</script>
 		%sveltekit.head%
 	</head>
 	<body>
