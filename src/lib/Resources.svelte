@@ -5,7 +5,7 @@ import { dynasty } from './utils/helper';
     const resources = [
         {
             name: "KeepTradeCut",
-            url: "https://keeptradecut.com",
+            url: "https://keeptradecut.com/trade-calculator",
             description: "Trade calculator and dynasty rankings, crowdsourced from millions of dynasty managers. Free.",
             icon: "insights",
             premium: false,
@@ -13,7 +13,7 @@ import { dynasty } from './utils/helper';
         },
         {
             name: "FantasyPros Dynasty Trade Value Chart",
-            url: "https://www.fantasypros.com/nfl/trade-value/dynasty.php",
+            url: "https://www.fantasypros.com/content/nfl/dynasty-nfl/nfl-trade-value-chart/",
             description: "Expert consensus dynasty trade values. Free tier available.",
             icon: "assessment",
             premium: true,
@@ -21,9 +21,17 @@ import { dynasty } from './utils/helper';
         },
         {
             name: "FantasyPros Trade Analyzer",
-            url: "https://www.fantasypros.com/nfl/trade-analyzer/dynasty.php",
+            url: "https://www.fantasypros.com/nfl/myplaybook/trade-analyzer.php",
             description: "Evaluate trades using expert rankings and your league settings. Free tier available.",
             icon: "calculate",
+            premium: true,
+            separator: true,
+        },
+        {
+            name: "FantasyPros Dynasty Rankings",
+            url: "https://www.fantasypros.com/nfl/rankings/dynasty-overall.php",
+            description: "Expert consensus dynasty rankings across all positions. Free tier available.",
+            icon: "leaderboard",
             premium: true,
             separator: true,
         },
