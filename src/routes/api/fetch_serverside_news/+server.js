@@ -1,20 +1,17 @@
 import {XMLParser, XMLValidator} from 'fast-xml-parser';
 import { waitForAll } from '$lib/utils/helperFunctions/multiPromise';
-import { dynasty } from '$lib/utils/helper';
 import { json } from '@sveltejs/kit';
 
 const FF_BALLERS= 'https://thefantasyfootballers.libsyn.com/fantasyfootball';
-const DYNASTY_LEAGUE= 'https://dynastyleaguefootball.com/feed/';
-const DYNASTY_NERDS= 'https://www.dynastynerds.com/feed/';
+const ROTOWIRE= 'https://www.rotowire.com/rss/news.php?sport=NFL';
+const ESPN= 'https://www.espn.com/espn/rss/nfl/news';
 
 export async function GET() {
 	const articles = [
         getXMLArticles(FF_BALLERS, processFF),
+        getXMLArticles(ROTOWIRE, processRotowire),
+        getXMLArticles(ESPN, processESPN),
 	];
-	if(dynasty) {
-		articles.push(getXMLArticles(DYNASTY_LEAGUE, processDynastyLeague));
-		articles.push(getXMLArticles(DYNASTY_NERDS, processDynastyNerds));
-	}
     const responses = await waitForAll(...articles).catch((err) => { console.error(err); });
 
 	let finalArticles = [];
@@ -82,18 +79,18 @@ const processFTN = (rawArticles) => {
 	return finalArticles;
 }
 
-const processDynastyLeague = (articles) => {
+const processRotowire = (articles) => {
 	let finalArticles = [];
 	for(const article of articles) {
 		const ts = Date.parse(article.pubDate);
 		const d = new Date(ts);
 		const date = stringDate(d);
-		const icon = 'newsIcons/dynastyLeague.png';
+		const icon = 'newsIcons/rotowire.png';
 		finalArticles.push({
 			title: article.title,
 			article: article.description,
 			link: article.link,
-			author: `Dynasty League Football`,
+			author: `Rotowire`,
 			ts,
 			date,
 			icon,
@@ -102,18 +99,18 @@ const processDynastyLeague = (articles) => {
 	return finalArticles;
 }
 
-const processDynastyNerds = (articles) => {
+const processESPN = (articles) => {
 	let finalArticles = [];
 	for(const article of articles) {
 		const ts = Date.parse(article.pubDate);
 		const d = new Date(ts);
 		const date = stringDate(d);
-		const icon = 'newsIcons/dynastyNerds.jpeg';
+		const icon = 'newsIcons/espn.png';
 		finalArticles.push({
 			title: article.title,
 			article: article.description,
 			link: article.link,
-			author: `Dynasty Nerds`,
+			author: `ESPN`,
 			ts,
 			date,
 			icon,
