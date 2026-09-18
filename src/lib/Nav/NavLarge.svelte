@@ -1,193 +1,202 @@
 <script>
-	import { onMount } from 'svelte';
 	import { tabs, isExternal } from '$lib/utils/tabs';
-	import Tab, { Icon, Label } from '@smui/tab';
-	import List, { Item, Graphic, Text, Separator } from '@smui/list';
-	import TabBar from '@smui/tab-bar';
-    import { page } from '$app/state';
-	import { goto, preloadData } from '$app/navigation';
-	import { enableBlog, managers } from '$lib/utils/leagueInfo';
+	import { page } from '$app/state';
+	import { preloadData } from '$app/navigation';
+	import { enableBlog, managers, leagueName } from '$lib/utils/leagueInfo';
 
-	let active = $state(tabs.find(tab => tab.dest == page.url.pathname || (tab.nest && tab.children.find(subTab => subTab.dest == page.url.pathname))));
+	let { darkTheme = $bindable(), switchTheme } = $props();
 
-	let display = $state(false);
-	let el = $state();
-	let parentEl = $state();
-	let width = $state();
-	let height= $state();
-	let left = $state();
-	let top = $state();
+	const currentPath = $derived(page.url.pathname);
+	const isChildActive = (tab) => tab.nest && tab.children.some((child) => child.dest === currentPath);
 
-	// .subMenu is positioned absolute relative to .parent, so its offsets must be
-	// measured against .parent's rect, not the viewport (getBoundingClientRect() alone).
-	const computePosition = () => {
-		const elRect = el?.getBoundingClientRect();
-		const parentRect = parentEl?.getBoundingClientRect();
-		if(!elRect || !parentRect) {
-			top = 0;
-			height = 0;
-			left = 0;
-			width = 0;
-			return;
-		}
-
-		top = elRect.top - parentRect.top;
-		height = (elRect.bottom - parentRect.top) + 1;
-		left = elRect.left - parentRect.left;
-		width = elRect.right - elRect.left;
+	const toggleTheme = () => {
+		darkTheme = !darkTheme;
+		switchTheme(darkTheme);
 	}
-
-	$effect(() => {
-		computePosition();
-	});
-
-	onMount(() => {
-		const resizeObserver = new ResizeObserver(() => computePosition());
-		if(el) resizeObserver.observe(el);
-		if(parentEl) resizeObserver.observe(parentEl);
-
-		// Toggling dark/light mode swaps a stylesheet, which can reflow the tab bar;
-		// wait a frame for that reflow before recomputing. See switchTheme() in Nav/index.svelte.
-		const handleThemeChange = () => requestAnimationFrame(computePosition);
-		window.addEventListener('resize', computePosition);
-		window.addEventListener('theme-changed', handleThemeChange);
-
-		return () => {
-			resizeObserver.disconnect();
-			window.removeEventListener('resize', computePosition);
-			window.removeEventListener('theme-changed', handleThemeChange);
-		};
-	});
-
-	let innerWidth = $state();
-
-	const open = () => {
-		display = !display;
-	}
-
-	const subGoto = (dest) => {
-		open(false);
-		if(isExternal(dest)) {
-			window.open(dest, '_blank');
-		} else {
-			goto(dest);
-		}
-	}
-
-	let tabChildren = $state([]);
-
-	for(const tab of tabs) {
-		if(tab.nest) {
-			tabChildren = tab.children;
-		}
-	}
-
 </script>
 
-<svelte:window bind:innerWidth={innerWidth} />
-
 <style>
-    :global(.navBar) {
-		display: inline-flex;
-		position: relative;
-    	justify-content: center;
-    }
-
-	:global(.navBar .material-icons) {
-		font-size: 1.8em;
-		height: 25px;
-		width: 22px;
+	.mainNav {
+		display: flex;
+		align-items: center;
+		background-color: var(--navBg);
+		border-bottom: 2px solid var(--navBorder);
+		padding: 0 1.5em;
+		height: 64px;
 	}
 
-	.parent {
-		position: relative;
+	.brand {
+		display: flex;
+		align-items: center;
+		gap: 0.6em;
+		text-decoration: none;
+		flex-shrink: 0;
 	}
 
-	.subMenu {
-		overflow-y: hidden;
-		display: block;
-		position: absolute;
-		z-index: 5;
-		background-color: var(--fff);
-		transition: all 0.4s;
+	.leagueName {
+		font-weight: 600;
+		font-size: 1.1em;
+		color: var(--navActive);
+		white-space: nowrap;
 	}
 
-	.overlay {
-		display: block;
-		position: absolute;
-		top: 0;
-		left: 0;
-		width: 100%;
-		height: 100%;
-		height: 100vh;
-		z-index: 4;
-	}
-
-	:global(.mdc-deprecated-list) {
+	.navItems {
+		display: flex;
+		align-items: center;
+		list-style: none;
+		margin: 0 0 0 2em;
 		padding: 0;
+		flex: 1;
+		gap: 0.25em;
+		height: 100%;
 	}
 
-	:global(.subText) {
-		font-size: 0.8em;
+	.navItem {
+		position: relative;
+		height: 100%;
+		display: flex;
+		align-items: center;
 	}
 
-	:global(.dontDisplay) {
+	.navLink,
+	.navLabel {
+		display: inline-flex;
+		align-items: center;
+		gap: 0.3em;
+		padding: 0.4em 0.2em;
+		color: var(--navInactive);
+		text-decoration: none;
+		font-size: 0.95em;
+		font-weight: 500;
+		cursor: pointer;
+		border-bottom: 2px solid transparent;
+		transition: color 0.2s ease;
+		user-select: none;
+	}
+
+	.navLink:hover {
+		color: var(--navHover);
+	}
+
+	.navItem.hasSubmenu:hover .navLabel {
+		color: var(--navHover);
+	}
+
+	.navItem.active > .navLink,
+	.navItem.active > .navLabel {
+		color: var(--navActive);
+		border-bottom-color: var(--navActive);
+	}
+
+	.chevron {
+		display: inline-block;
+		font-size: 0.9em;
+		transition: transform 0.2s ease;
+	}
+
+	.navItem.hasSubmenu:hover .chevron {
+		transform: rotate(90deg);
+	}
+
+	.submenu {
 		display: none;
+		position: absolute;
+		top: 100%;
+		left: 0;
+		min-width: 210px;
+		list-style: none;
+		margin: 0;
+		padding: 0.4em 0;
+		background-color: var(--navBg);
+		border: 1px solid var(--navBorder);
+		border-top: none;
+		z-index: 5;
+	}
+
+	.navItem.hasSubmenu:hover .submenu {
+		display: block;
+	}
+
+	.submenu li a {
+		display: block;
+		padding: 0.5em 1em;
+		color: var(--navInactive);
+		text-decoration: none;
+		font-size: 0.9em;
+		border-bottom: 2px solid transparent;
+		transition: color 0.2s ease;
+	}
+
+	.submenu li a:hover {
+		color: var(--navHover);
+	}
+
+	.submenu li a.active {
+		color: var(--navActive);
+		border-bottom-color: var(--navActive);
+	}
+
+	.themeToggle {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		width: 36px;
+		height: 36px;
+		flex-shrink: 0;
+		background: none;
+		border: none;
+		cursor: pointer;
+		color: var(--navInactive);
+		font-size: 1.4em;
+		transition: color 0.2s ease;
+	}
+
+	.themeToggle:hover {
+		color: var(--navHover);
 	}
 </style>
 
-<div tabindex="0" role="button" class="overlay" style="display: {display ? "block" : "none"};" onclick={() => open(true)}></div>
+<div class="mainNav">
+	<a href="/" class="brand">
+		<img src="/badge.png" alt="league logo" style="width: 36px; height: 36px; object-fit: contain;" />
+		<span class="leagueName">{leagueName}</span>
+	</a>
 
-<div class="parent" bind:this={parentEl}>
-	<TabBar class="navBar" {tabs} key={(tab) => tab.key} bind:active>
-		{#snippet tab(tab)}
+	<ul class="navItems">
+		{#each tabs as tab}
 			{#if tab.nest}
-				<div bind:this={el}>
-					<Tab
-						{tab}
-						minWidth
-						onclick={() => open()}
-					>
-						<Icon class="material-icons">{tab.icon}</Icon>
-						<Label>{tab.label}</Label>
-					</Tab>
-				</div>
-			{:else}
-				<Tab
-					class="{tab.label == 'Blog' && !enableBlog ? 'dontDisplay' : ''}"
-					{tab}
-					onTouchstart={() => preloadData(tab.dest)}
-					onMouseover={() => preloadData(tab.dest)}
-					href={tab.dest}
-					minWidth
-				>
-					<Icon class="material-icons">{tab.icon}</Icon>
-					<Label>{tab.label}</Label>
-				</Tab>
+				<li class="navItem hasSubmenu {isChildActive(tab) ? 'active' : ''}">
+					<span class="navLabel">
+						{tab.label}
+						<span class="chevron">›</span>
+					</span>
+					<ul class="submenu">
+						{#each tab.children as child}
+							{#if child.label != 'Managers' || managers.length > 0}
+								<li>
+									<a
+										href={child.dest}
+										target={isExternal(child.dest) ? '_blank' : undefined}
+										rel={isExternal(child.dest) ? 'noopener noreferrer' : undefined}
+										onmouseover={() => { if(!isExternal(child.dest)) preloadData(child.dest); }}
+										class={currentPath === child.dest ? 'active' : ''}
+									>
+										{child.label}
+									</a>
+								</li>
+							{/if}
+						{/each}
+					</ul>
+				</li>
+			{:else if tab.label != 'Blog' || enableBlog}
+				<li class="navItem {currentPath === tab.dest ? 'active' : ''}">
+					<a href={tab.dest} onmouseover={() => preloadData(tab.dest)} class="navLink">{tab.label}</a>
+				</li>
 			{/if}
-		{/snippet}
-	</TabBar>
-	<div class="subMenu" style="max-height: {display ? 49 * tabChildren.length - 1 - (managers.length ? 0 : 48) : 0}px; width: {width}px; top: {height}px; left: {left}px; box-shadow: 0 0 {display ? "3px" : "0"} 0 #00316b; border: {display ? "1px" : "0"} solid #00316b; border-top: none;">
-		<List>
-			{#each tabChildren as subTab, ix}
-				{#if subTab.label == 'Managers'}
-					<Item class="{managers.length ? '' : 'dontDisplay'}" onSMUIAction={() => subGoto(subTab.dest)} ontouchstart={() => preloadData(subTab.dest)} onmouseover={() => preloadData(subTab.dest)}>
-						<Graphic class="material-icons">{subTab.icon}</Graphic>
-						<Text class="subText">{subTab.label}</Text>
-					</Item>
-					{#if ix != tabChildren.length - 1}
-						<Separator />
-					{/if}
-				{:else}
-					<Item onSMUIAction={() => subGoto(subTab.dest)} ontouchstart={() => {if(!isExternal(subTab.dest)) preloadData(subTab.dest)}} onmouseover={() => {if(!isExternal(subTab.dest)) preloadData(subTab.dest)}}>
-						<Graphic class="material-icons">{subTab.icon}</Graphic>
-						<Text class="subText">{subTab.label}</Text>
-					</Item>
-					{#if ix != tabChildren.length - 1}
-						<Separator />
-					{/if}
-				{/if}
-			{/each}
-		</List>
-	</div>
+		{/each}
+	</ul>
+
+	<button type="button" class="themeToggle" onclick={toggleTheme} aria-label="Toggle dark mode">
+		<span class="material-icons">{darkTheme ? 'light_mode' : 'dark_mode'}</span>
+	</button>
 </div>

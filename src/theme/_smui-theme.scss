@@ -74,6 +74,15 @@
   --borderOverride: rgba(0,0,0,.12);
   --rivalryBack: #f8f8f8;
 
+  // Main nav
+  --navBg: #f1f5f9;
+  --navBorder: #1e3a5f;
+  --logoIconBg: #1e3a5f;
+  --logoIconText: #f1a527;
+  --navInactive: #475569;
+  --navHover: #c87d0e;
+  --navActive: #c87d0e;
+
   // Chart bar colors
   --barChartOne: #7fc4f5;
   --barChartTwo: #5bcff7;
@@ -123,9 +132,7 @@ body {
   background-color: theme.$surface;
   color: theme.$on-surface;
   min-height: 100vh;
-  background: #f4f4f4;
-  background: linear-gradient(to bottom right, #f4f4f4,#ebebeb );
-  background: -webkit-linear-gradient(to bottom right, #f4f4f4,#ebebeb );
+  background: #f1f5f9;
 }
  
 //

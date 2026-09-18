@@ -42,9 +42,14 @@
     	margin: 0 auto;
 	}
 	nav {
-		background-color: var(--fff);
 		position: relative;
 		z-index: 2;
+	}
+
+	.small {
+		display: none;
+		position: relative;
+		background-color: var(--fff);
 		border-bottom: 1px solid #00316b;
 		box-shadow: 0 0 8px 0 #00316b;
 	}
@@ -59,10 +64,6 @@
     .large {
 		display: block;
     }
-
-	.small {
-		display: none;
-	}
 
 	.container {
 		position: absolute;
@@ -86,25 +87,25 @@
 </style>
 
 <nav>
-	<a href="/"><img id="logo" alt="league logo" src="/badge.png" /></a>
-
-	<div class="container">
-		<IconButton
-			toggle
-			bind:pressed={darkTheme}
-			onclick={() => switchTheme(darkTheme)}
-			class="lightDark"
-		>
-			<Icon class="material-icons" on>dark_mode</Icon>
-			<Icon class="material-icons">light_mode</Icon>
-		</IconButton>
-	</div>
-
 	<div class="large">
-		<NavLarge />
+		<NavLarge bind:darkTheme={darkTheme} {switchTheme} />
 	</div>
 
 	<div class="small">
+		<a href="/"><img id="logo" alt="league logo" src="/badge.png" /></a>
+
+		<div class="container">
+			<IconButton
+				toggle
+				bind:pressed={darkTheme}
+				onclick={() => switchTheme(darkTheme)}
+				class="lightDark"
+			>
+				<Icon class="material-icons" on>dark_mode</Icon>
+				<Icon class="material-icons">light_mode</Icon>
+			</IconButton>
+		</div>
+
 		<NavSmall />
 	</div>
 
