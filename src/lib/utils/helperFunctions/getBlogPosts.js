@@ -210,7 +210,11 @@ const genContent = (element, indent) => {
 
 // helper function for generateParagraph that shouldn't be exported
 const getImg = (img) => {
-    return `https://${img.fields.file.url.split('//')[1]}?fm=jpg&fl=progressive`;
+    const url = `https://${img.fields.file.url.split('//')[1]}`;
+    if(img.fields.file.contentType == 'image/gif') {
+        return url;
+    }
+    return `${url}?fm=jpg&fl=progressive`;
 }
 
 const genOpeningModifiers = (marks) => {
