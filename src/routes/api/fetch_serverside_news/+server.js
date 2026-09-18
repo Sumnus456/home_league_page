@@ -85,7 +85,7 @@ const processRotowire = (articles) => {
 		const ts = Date.parse(article.pubDate);
 		const d = new Date(ts);
 		const date = stringDate(d);
-		const icon = 'newsIcons/rotowire.png';
+		const icon = null;
 		finalArticles.push({
 			title: article.title,
 			article: article.description,
@@ -105,7 +105,7 @@ const processESPN = (articles) => {
 		const ts = Date.parse(article.pubDate);
 		const d = new Date(ts);
 		const date = stringDate(d);
-		const icon = 'newsIcons/espn.png';
+		const icon = null;
 		finalArticles.push({
 			title: article.title,
 			article: article.description,
