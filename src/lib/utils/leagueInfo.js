@@ -9,6 +9,7 @@ export const enableBlog = true; // requires VITE_CONTENTFUL_ACCESS_TOKEN and VIT
 export const homepageText = `
   <p>After beginning the fantasy football journey in 2009 in a little card shop in Fort Wayne playing redraft leagues through 2022, it was finally time to venture into the world of Dynasty in 2023. This website is here to document and display some of that moving forward.</p>
   <p>Starting in 2025 we added a game against the league median each week to help separate team records a bit more. With a smaller league, everyone tends to feel only a game or two apart all year.</p>
+  <p>Jenny decided to retire in 2026. We welcome Taylor on board to take over management of the team Jenny built, starting with the 2026 Rookie draft, and moving into the 2026 season. Taylor hasn't played Dynasty yet, but was the regular season champion in redraft in 2021.</p>
 `;
 
 /*   STEP 3   */
