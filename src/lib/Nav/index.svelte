@@ -41,9 +41,10 @@
 		display: table;
     	margin: 0 auto;
 	}
-	nav {
+	.navShell {
 		position: relative;
 		z-index: 2;
+		display: contents;
 	}
 
 	.small {
@@ -62,7 +63,7 @@
 	}
 
     .large {
-		display: block;
+		display: contents;
     }
 
 	.container {
@@ -75,7 +76,11 @@
 		color: var(--g555)
 	}
 
-	@media (max-width: 950px) { /* width of the large navBar */
+	@media (max-width: 899px) { /* below the desktop dashboard breakpoint */
+		.navShell {
+			display: block;
+		}
+
 		.large {
 			display: none;
 		}
@@ -86,7 +91,7 @@
 	}
 </style>
 
-<nav>
+<div class="navShell">
 	<div class="large">
 		<NavLarge bind:darkTheme={darkTheme} {switchTheme} />
 	</div>
@@ -109,4 +114,4 @@
 		<NavSmall />
 	</div>
 
-</nav>
+</div>

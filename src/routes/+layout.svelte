@@ -8,9 +8,49 @@
 </script>
 
 <main>
-    <Nav /> <!-- adds the nav (small and large) -->
-  
-    <slot />
+    <div class="appShell">
+        <Nav /> <!-- adds the nav (small and large) -->
+
+        <div class="pageContent">
+            <slot />
+        </div>
+    </div>
 
     <Footer /> <!-- adds the footer -->
 </main>
+
+<style>
+    .appShell {
+        display: block;
+    }
+
+    :global(.pageContent) {
+        min-width: 400px;
+    }
+
+    @media (min-width: 900px) {
+        .appShell {
+            display: grid;
+            grid-template-columns: 200px 1fr;
+            grid-template-rows: 48px 1fr;
+            grid-template-areas:
+                "topbar topbar"
+                "leftnav content";
+            min-height: 100vh;
+        }
+
+        :global(.appShell .topBar) {
+            grid-area: topbar;
+        }
+
+        :global(.appShell .leftNav) {
+            grid-area: leftnav;
+        }
+
+        :global(.appShell .pageContent) {
+            grid-area: content;
+            flex: 1;
+            overflow-y: auto;
+        }
+    }
+</style>
