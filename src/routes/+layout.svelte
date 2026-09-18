@@ -39,7 +39,7 @@
         .appShell {
             display: grid;
             grid-template-columns: 200px 1fr;
-            grid-template-rows: 48px 1fr;
+            grid-template-rows: 64px 1fr;
             grid-template-areas:
                 "topbar topbar"
                 "leftnav content";
