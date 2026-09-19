@@ -1,8 +1,9 @@
 <script>
 	import LinearProgress from '@smui/linear-progress';
-    import {AllManagers} from '$lib/components';
-	import { onMount } from 'svelte';
+    import {AllManagers, ManagersSidebar} from '$lib/components';
+	import { onMount, onDestroy } from 'svelte';
 	import { goto } from '$app/navigation';
+	import { sidebarContent } from '$lib/stores';
 
 	export let data;
 	const {managers, leagueTeamManagersData} = data;
@@ -11,6 +12,11 @@
         if(!managers.length) {
             goto('/');
         }
+        sidebarContent.set(ManagersSidebar);
+    })
+
+    onDestroy(() => {
+        sidebarContent.set(null);
     })
 </script>
 

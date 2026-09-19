@@ -1,9 +1,19 @@
 <script>
 	import LinearProgress from '@smui/linear-progress';
-	import { Records } from '$lib/components';
+	import { Records, RecordsSidebar } from '$lib/components';
+	import { onMount, onDestroy } from 'svelte';
+	import { sidebarContent } from '$lib/stores';
 
     export let data;
     const recordsInfo = data.recordsInfo;
+
+	onMount(() => {
+		sidebarContent.set(RecordsSidebar);
+	});
+
+	onDestroy(() => {
+		sidebarContent.set(null);
+	});
 </script>
 
 <style>

@@ -21,6 +21,12 @@ import Standings from './Standings/index.svelte';
 import HomeSidebar from './Sidebars/HomeSidebar.svelte';
 import MatchupsSidebar from './Sidebars/MatchupsSidebar.svelte';
 import StandingsSidebar from './Sidebars/StandingsSidebar.svelte';
+import ManagersSidebar from './Sidebars/ManagersSidebar.svelte';
+import TransactionsSidebar from './Sidebars/TransactionsSidebar.svelte';
+import DraftsSidebar from './Sidebars/DraftsSidebar.svelte';
+import RivalrySidebar from './Sidebars/RivalrySidebar.svelte';
+import RecordsSidebar from './Sidebars/RecordsSidebar.svelte';
+import TrophyRoomSidebar from './Sidebars/TrophyRoomSidebar.svelte';
 
 export {
     Nav,
@@ -46,4 +52,10 @@ export {
     HomeSidebar,
     MatchupsSidebar,
     StandingsSidebar,
+    ManagersSidebar,
+    TransactionsSidebar,
+    DraftsSidebar,
+    RivalrySidebar,
+    RecordsSidebar,
+    TrophyRoomSidebar,
 };

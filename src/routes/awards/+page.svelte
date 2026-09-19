@@ -1,10 +1,20 @@
 <script>
-	import { Awards } from '$lib/components'
+	import { Awards, TrophyRoomSidebar } from '$lib/components'
 	import { waitForAll } from '$lib/utils/helper';
 	import LinearProgress from '@smui/linear-progress';
+	import { onMount, onDestroy } from 'svelte';
+	import { sidebarContent } from '$lib/stores';
 
     export let data;
     const {awardsData, teamManagersData} = data;
+
+	onMount(() => {
+		sidebarContent.set(TrophyRoomSidebar);
+	});
+
+	onDestroy(() => {
+		sidebarContent.set(null);
+	});
 </script>
 
 <style>

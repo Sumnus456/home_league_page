@@ -1,12 +1,22 @@
 <script>
 	import LinearProgress from '@smui/linear-progress';
-	import { TransactionsPage } from '$lib/components'
+	import { TransactionsPage, TransactionsSidebar } from '$lib/components'
     import { waitForAll } from '$lib/utils/helper';
+	import { onMount, onDestroy } from 'svelte';
+	import { sidebarContent } from '$lib/stores';
 
     export let data;
     const {show, query, page, playersData, transactionsData, leagueTeamManagersData} = data;
 
 	const perPage = 10;
+
+	onMount(() => {
+		sidebarContent.set(TransactionsSidebar);
+	});
+
+	onDestroy(() => {
+		sidebarContent.set(null);
+	});
 </script>
 
 <style>

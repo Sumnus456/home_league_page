@@ -1,8 +1,18 @@
 <script>
-	import { Drafts } from '$lib/components';
+	import { Drafts, DraftsSidebar } from '$lib/components';
+	import { onMount, onDestroy } from 'svelte';
+	import { sidebarContent } from '$lib/stores';
 
     export let data;
     const {upcomingDraftData, previousDraftsData, leagueTeamManagersData, playersData} = data;
+
+	onMount(() => {
+		sidebarContent.set(DraftsSidebar);
+	});
+
+	onDestroy(() => {
+		sidebarContent.set(null);
+	});
 </script>
 
 <style>

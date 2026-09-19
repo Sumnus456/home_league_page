@@ -1,7 +1,9 @@
 <script>
 	import LinearProgress from '@smui/linear-progress';
-	import { Rivalry } from '$lib/components'
+	import { Rivalry, RivalrySidebar } from '$lib/components'
 	import { waitForAll } from '$lib/utils/helper';
+	import { onMount, onDestroy } from 'svelte';
+	import { sidebarContent } from '$lib/stores';
 
 	export let data;
 	const {
@@ -12,6 +14,14 @@
         playerOne,
         playerTwo,
     } = data;
+
+	onMount(() => {
+		sidebarContent.set(RivalrySidebar);
+	});
+
+	onDestroy(() => {
+		sidebarContent.set(null);
+	});
 </script>
 
 <style>
