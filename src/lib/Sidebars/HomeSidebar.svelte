@@ -37,6 +37,13 @@
 		font-size: 1.5em;
 	}
 
+	.homeBanner .center {
+		overflow: hidden;
+		text-overflow: ellipsis;
+		white-space: nowrap;
+		padding: 0 0.5em;
+	}
+
 	/* champ styling */
 	#currentChamp {
 		padding: 25px 0;
@@ -81,12 +88,16 @@
 	}
 
 	.label {
-		display: table;
+		display: block;
+		max-width: 90%;
+		margin: 6px auto 10px;
 		text-align: center;
 		line-height: 1.1em;
 		font-size: 1.7em;
-		margin: 6px auto 10px;
 		cursor: pointer;
+		overflow: hidden;
+		text-overflow: ellipsis;
+		white-space: nowrap;
 	}
 
 	:global(.curOwner) {

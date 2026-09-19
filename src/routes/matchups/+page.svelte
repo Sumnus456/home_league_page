@@ -1,8 +1,18 @@
 <script>
-	import { MatchupsAndBrackets } from '$lib/components';
+	import { onMount, onDestroy } from 'svelte';
+	import { MatchupsAndBrackets, MatchupsSidebar } from '$lib/components';
+	import { sidebarContent } from '$lib/stores';
 
 	export let data;
 	const {queryWeek, matchupsData, bracketsData, playersData, leagueTeamManagersData} = data;
+
+	onMount(() => {
+		sidebarContent.set(MatchupsSidebar);
+	});
+
+	onDestroy(() => {
+		sidebarContent.set(null);
+	});
 </script>
 
 <style>

@@ -19,6 +19,8 @@ import FullPost from './BlogPosts/FullPost.svelte';
 import Posts from './BlogPosts/Posts.svelte';
 import Standings from './Standings/index.svelte';
 import HomeSidebar from './Sidebars/HomeSidebar.svelte';
+import MatchupsSidebar from './Sidebars/MatchupsSidebar.svelte';
+import StandingsSidebar from './Sidebars/StandingsSidebar.svelte';
 
 export {
     Nav,
@@ -42,4 +44,6 @@ export {
     FullPost,
     Standings,
     HomeSidebar,
+    MatchupsSidebar,
+    StandingsSidebar,
 };

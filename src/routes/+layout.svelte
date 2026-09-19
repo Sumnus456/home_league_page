@@ -47,7 +47,7 @@
         }
 
         .appShell.has-sidebar {
-            grid-template-columns: 200px 1fr clamp(200px, 20vw, 260px);
+            grid-template-columns: 200px 1fr clamp(220px, 22vw, 300px);
             grid-template-areas:
                 "topbar topbar topbar"
                 "leftnav content sidebar";
