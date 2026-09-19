@@ -15,7 +15,7 @@
 			for(const roster of weekData.matchups[matchupID]) {
 				roster.starters.forEach((playerID, i) => {
 					const points = roster.points?.[i];
-					if(playerID && playerID != '0' && points != null && players[playerID]) {
+					if(playerID && playerID != '0' && points > 0 && players[playerID]) {
 						scored.push({ playerID, points });
 					}
 				});
@@ -87,13 +87,15 @@
 </style>
 
 <div class="sidebar">
-	<div class="banner">Top Scorers</div>
-
-	<div class="list">
-		{#await dataPromise}
+	{#await dataPromise}
+		<div class="banner">Top Players</div>
+		<div class="list">
 			<p class="center">Loading top scorers...</p>
 			<LinearProgress indeterminate />
-		{:then [matchupsResponse, playersData]}
+		</div>
+	{:then [matchupsResponse, playersData]}
+		<div class="banner">Top Players - Week {matchupsResponse.week}</div>
+		<div class="list">
 			{#if matchupsResponse?.matchupWeeks?.length}
 				{#each topScorers(matchupsResponse, playersData.players) as scorer (scorer.playerID)}
 					{@const player = playersData.players[scorer.playerID]}
@@ -106,8 +108,11 @@
 			{:else}
 				<p class="center">No scoring data yet.</p>
 			{/if}
-		{:catch error}
+		</div>
+	{:catch error}
+		<div class="banner">Top Players</div>
+		<div class="list">
 			<p class="center">Something went wrong: {error.message}</p>
-		{/await}
-	</div>
+		</div>
+	{/await}
 </div>

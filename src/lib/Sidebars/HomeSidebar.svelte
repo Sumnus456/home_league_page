@@ -38,9 +38,6 @@
 	}
 
 	.homeBanner .center {
-		overflow: hidden;
-		text-overflow: ellipsis;
-		white-space: nowrap;
 		padding: 0 0.5em;
 	}
 
