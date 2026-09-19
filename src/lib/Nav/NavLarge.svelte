@@ -80,7 +80,7 @@
 	}
 
 	.leftNav {
-		width: 200px;
+		width: 220px;
 		flex-shrink: 0;
 		background-color: var(--navBg);
 		border-right: 1px solid var(--navBorder);
@@ -98,10 +98,10 @@
 		display: flex;
 		align-items: center;
 		gap: 0.7em;
-		padding: 0.65em 1.25em;
+		padding: 0.85em 1.25em;
 		color: var(--navInactive);
 		text-decoration: none;
-		font-size: 0.9em;
+		font-size: 1em;
 		font-weight: 500;
 		border-left: 3px solid transparent;
 		transition: color 0.2s ease;
@@ -122,7 +122,7 @@
 
 	.navItem.sub {
 		padding-left: calc(1.25em + 12px);
-		font-size: 0.82em;
+		font-size: 0.9em;
 	}
 
 	.sectionLabel {

@@ -38,7 +38,7 @@
     @media (min-width: 900px) {
         .appShell {
             display: grid;
-            grid-template-columns: 200px 1fr;
+            grid-template-columns: 220px 1fr;
             grid-template-rows: 80px 1fr;
             grid-template-areas:
                 "topbar topbar"
@@ -47,7 +47,7 @@
         }
 
         .appShell.has-sidebar {
-            grid-template-columns: 200px 1fr clamp(220px, 22vw, 300px);
+            grid-template-columns: 220px 1fr clamp(220px, 22vw, 300px);
             grid-template-areas:
                 "topbar topbar topbar"
                 "leftnav content sidebar";
