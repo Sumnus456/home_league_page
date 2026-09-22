@@ -112,6 +112,7 @@
     .explainer {
         text-align: center;
         font-size: 0.85em;
+        font-style: italic;
         color: var(--g555);
         max-width: 700px;
         margin: 0.5em auto 0;
