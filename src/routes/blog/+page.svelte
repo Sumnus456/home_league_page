@@ -1,8 +1,18 @@
 <script>
-    import { Posts } from "$lib/components";
+    import { onMount, onDestroy } from 'svelte';
+    import { Posts, BlogSidebar } from "$lib/components";
+    import { sidebarContent } from '$lib/stores';
 
     export let data;
     const {postsData, queryPage, filterKey, leagueTeamManagersData} = data;
+
+    onMount(() => {
+        sidebarContent.set(BlogSidebar);
+    });
+
+    onDestroy(() => {
+        sidebarContent.set(null);
+    });
 </script>
 
 <style>

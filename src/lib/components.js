@@ -27,6 +27,7 @@ import DraftsSidebar from './Sidebars/DraftsSidebar.svelte';
 import RivalrySidebar from './Sidebars/RivalrySidebar.svelte';
 import RecordsSidebar from './Sidebars/RecordsSidebar.svelte';
 import TrophyRoomSidebar from './Sidebars/TrophyRoomSidebar.svelte';
+import BlogSidebar from './Sidebars/BlogSidebar.svelte';
 
 export {
     Nav,
@@ -58,4 +59,5 @@ export {
     RivalrySidebar,
     RecordsSidebar,
     TrophyRoomSidebar,
+    BlogSidebar,
 };
